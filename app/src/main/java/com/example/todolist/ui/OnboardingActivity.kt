@@ -2,30 +2,33 @@ package com.example.todolist.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.todolist.R
 import com.example.todolist.adapter.OnboardingAdapter
 import com.example.todolist.model.OnboardingItem
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.button.MaterialButton
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class OnboardingActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
-    private lateinit var btnNext: Button
-    private lateinit var btnSkip: TextView
+    private lateinit var dots: DotsIndicator
+    private lateinit var btnNext: MaterialButton
+    private lateinit var btnSkip: MaterialButton
+
+    private lateinit var items: List<OnboardingItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
         viewPager = findViewById(R.id.viewPager)
+        dots = findViewById(R.id.dots)
         btnNext = findViewById(R.id.btnNext)
         btnSkip = findViewById(R.id.btnSkip)
 
-        val items = listOf(
+        items = listOf(
             OnboardingItem(
                 R.drawable.ic_check,
                 "Organize Tasks",
@@ -44,8 +47,9 @@ class OnboardingActivity : AppCompatActivity() {
         )
 
         viewPager.adapter = OnboardingAdapter(items)
-        TabLayoutMediator(findViewById(R.id.dots), viewPager) { _, _ -> }.attach()
+        dots.attachTo(viewPager)
 
+        // ✅ Listener SEKALI SAJA
         btnNext.setOnClickListener {
             if (viewPager.currentItem < items.size - 1) {
                 viewPager.currentItem++
@@ -58,10 +62,13 @@ class OnboardingActivity : AppCompatActivity() {
             finishOnboarding()
         }
 
+        // Update UI berdasarkan page
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                btnNext.text =
-                    if (position == items.size - 1) "Get Started" else "Next"
+                val isLastPage = position == items.size - 1
+
+                btnNext.text = if (isLastPage) "Get Started" else "Next"
+                btnSkip.visibility = if (isLastPage) ViewPager2.GONE else ViewPager2.VISIBLE
             }
         })
     }
@@ -76,3 +83,4 @@ class OnboardingActivity : AppCompatActivity() {
         finish()
     }
 }
+
