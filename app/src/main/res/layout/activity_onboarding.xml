@@ -11,27 +11,48 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.google.android.material.tabs.TabLayout
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/dots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:tabIndicatorHeight="0dp"
-        app:tabIndicatorFullWidth="false" />
+        android:layout_marginTop="8dp"
+        app:dotsColor="?attr/colorOnSurfaceVariant"
+        app:selectedDotColor="?attr/colorPrimary"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="8dp"
+        app:dotsSpacing="6dp"
+        app:dotsWidthFactor="2.5"
+        app:progressMode="true" />
 
-    <Button
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNext"
         android:layout_marginTop="16dp"
+        android:textColor="@color/white"
         android:text="Next"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:cornerRadius="20dp" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSkip"
+        android:layout_marginTop="8dp"
         android:text="Skip"
-        android:gravity="center"
-        android:padding="12dp"
-        android:textColor="@color/primary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:strokeColor="?attr/colorPrimary"
+        app:strokeWidth="1.5dp"
+        app:cornerRadius="20dp"
+        android:layout_marginBottom="20dp"
+        app:backgroundTint="?attr/colorSurface"
+        android:textColor="?attr/colorPrimary"  />
+
 </LinearLayout>

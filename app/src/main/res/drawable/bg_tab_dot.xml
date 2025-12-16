@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ACTIVE (pil lonjong) -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <size
+                android:width="24dp"
+                android:height="8dp" />
+            <corners android:radius="4dp" />
+            <solid android:color="@color/primary" />
+        </shape>
+    </item>
+
+    <!-- INACTIVE (dot bulat) -->
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="8dp"
+                android:height="8dp" />
+            <solid android:color="#D1D5DB" />
+        </shape>
+    </item>
+
+</selector>
